@@ -1,0 +1,5 @@
+---
+env:
+   dbUsername: 0b563b02-1e03-481d-863d-c32a477aef8f-bluemix
+   dbPassword: https://0b563b02-1e03-481d-863d-c32a477aef8f-bluemix:770a564648417076f49c7bb0275fbe7b1157aa842894ddb21bf208c74a948279@0b563b02-1e03-481d-863d-c32a477aef8f-bluemix.cloudant.com
+   dbUrl: 770a564648417076f49c7bb0275fbe7b1157aa842894ddb21bf208c74a948279

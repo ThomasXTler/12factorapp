@@ -33,6 +33,7 @@ public class JaxrsHttpReceiver {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getResponse() throws NullPointerException, IOException {
+        System.out.println("----> Called GET");
         try {
             String dbFiles = getDatabases();
             return Response.ok(dbFiles).build();
@@ -46,6 +47,7 @@ public class JaxrsHttpReceiver {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDatabaseResponse(@PathParam("name") String name) {
+        System.out.println("----> Called GET /{name}");
         try {
             String database = getDatabaseFiles(name);
             return Response.ok(database).build();
@@ -76,6 +78,7 @@ public class JaxrsHttpReceiver {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response postResponse(String data) throws NullPointerException, IOException {
+        System.out.println("----> Called POST");
         try {
             String contents = storeData(data);
             return Response.ok(contents).build();
@@ -89,8 +92,10 @@ public class JaxrsHttpReceiver {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response postDataResponse(String data, @PathParam("name") String name) {
+        System.out.println("----> Called POST /{name}");
         try {
             String contents = storeData(data, name);
+            System.out.println("---->" + data + " " + name);
             return Response.ok(contents).build();
         } catch (Exception e) {
             JsonObject exception = Json.createObjectBuilder().add("Exception", e.getMessage()).build();
@@ -110,6 +115,7 @@ public class JaxrsHttpReceiver {
         JsonObject jsonData = reader.readObject();
         Entity<myObject> ent = Entity.entity(new myObject(jsonData), MediaType.APPLICATION_JSON);
         // Get response
+        System.out.println("----> JsonData" + jsonData);
         ResponseHandler responseHandler = new ResponseHandler("/" + database + "/");
         String response = responseHandler.invoke(RequestType.POST, ent);
         return response;
@@ -118,6 +124,7 @@ public class JaxrsHttpReceiver {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response putResponse(String databaseName) throws NullPointerException, IOException {
+        System.out.println("----> Called PUT");
         System.out.println("Creating database called " + databaseName);
         String response;
         try {

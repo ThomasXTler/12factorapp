@@ -1,0 +1,56 @@
+## From the Liberty Core image
+FROM websphere-liberty:webProfile7
+
+## set the maintainer
+MAINTAINER oliver.lucht@de.ibm.com
+LABEL maintainer "oliver.lucht@de.ibm.com"
+
+## install CURL in the Container (needed to sucessfully run the sidecar installation?)
+RUN apt-get update
+RUN apt-get install -y curl
+
+## Amalgam8 Install Sidecar
+RUN curl -sSL https://github.com/amalgam8/amalgam8/releases/download/v0.4.2/a8sidecar.sh | sh
+## Amalgam8
+
+## Copy local server.xml (with endpoint definition and *hosts) file to config directory in the container
+COPY ./12-factor-wlpcfg/servers/12FactorAppServer/server.xml /config/
+
+## could be deleted?
+ARG REPOSITORIES_PROPERTIES=""
+
+## Use Liberty installUtilitiy to install some addones and accecpt the Liberty license
+RUN if [ ! -z $REPOSITORIES_PROPERTIES ]; then echo $REPOSITORIES_PROPERTIES > /opt/ibm/wlp/etc/repositories.properties; fi \
+    && installUtility install --acceptLicense appSecurityClient-1.0 javaee-7.0 javaeeClient-7.0 \
+    && if [ ! -z $REPOSITORIES_PROPERTIES ] ; then rm /opt/ibm/wlp/etc/repositories.properties; fi \
+    && rm -rf /output/workarea /output/logs
+
+## Copy local .war file to the config/dropins directory in the container
+ADD ./12-factor-wlpcfg/servers/12FactorAppServer/apps/12-factor-application.war /config/dropins/
+
+## Set some environment vars in the container
+ENV PATH=/opt/ibm/wlp/bin:$PATH
+ENV LOG_DIR=/logs
+ENV WLP_OUTPUT_DIR=/opt/ibm/wlp/output
+ENV dbPassword=770a564648417076f49c7bb0275fbe7b1157aa842894ddb21bf208c74a948279
+ENV dbUrl=https://0b563b02-1e03-481d-863d-c32a477aef8f-bluemix:770a564648417076f49c7bb0275fbe7b1157aa842894ddb21bf208c74a948279@0b563b02-1e03-481d-863d-c32a477aef8f-bluemix.cloudant.com
+ENV dbUsername=0b563b02-1e03-481d-863d-c32a477aef8f-bluemix
+
+## Amalgam8 script_to_launch_sidecar_and_app
+ENTRYPOINT ["a8sidecar", "--register", "--proxy", "--supervise", "/opt/ibm/docker/docker-server", "run", "defaultServer"]
+
+## Amalgam8 environment vars, e.g. to define the URL of the Amalgam8 Control Panel (Registry & Controller)
+ENV A8_SERVICE=12factorappa8:v1.0
+ENV A8_ENDPOINT_PORT=9082
+ENV A8_ENDPOINT_TYPE=http
+ENV A8_REGISTRY_URL=http://Amalgam8-ol-registry.mybluemix.net
+ENV A8_REGISTRY_POLL=60s
+ENV A8_CONTROLLER_URL=http://Amalgam8-a8-controller.mybluemix.net
+ENV A8_CONTROLLER_POLL=60s
+ENV A8_LOG=true
+
+## Expose / open port 9082 which is the port the microservices uses
+EXPOSE 9082
+
+## Command to start the docker server (and the apps in the dropin dir). Not needed if Amalgam8 runs as supervisor and starts the app
+#CMD ["/opt/ibm/docker/docker-server", "run", "defaultServer"]

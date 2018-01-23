@@ -17,7 +17,7 @@ public class TestServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         PrintWriter out = response.getWriter();
-        out.println("hello world");
+        out.println("hello world from Container V4.0 !!!");
+        System.out.println("printed - hello world from Container bluemix v4 - to the screen");
     }
-
 }
