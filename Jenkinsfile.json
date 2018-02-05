@@ -1,0 +1,19 @@
+{
+  "pipeline": {
+    "enabled" : true
+  },
+  "image" : {
+    "dockerhub_user" : "none",
+    "image_name" : "12factorapp",
+    "registry" : "private",
+    "publish" : true,
+    "build_path" : "."
+  },
+  "release" : {
+    "chart_dir" : "./bluemix/12factorapp/sample.microservices.12factorapp/helm/12factorapp",
+    "initialInstall" : true,
+    "name" : "12_Factor_App",
+    "test" : true,
+    "dryrun" : false
+  }
+}
