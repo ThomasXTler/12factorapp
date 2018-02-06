@@ -26,7 +26,7 @@ podTemplate(label: 'mypod',
         def pwd = pwd()
         checkout scm
 
-        // Read configuration file
+        //Read configuration file
         //Inspired by lachie83
         def configfile = readFile('Jenkinsfile.json')
         def config = new groovy.json.JsonSlurperClassic().parseText(configfile)
@@ -48,12 +48,12 @@ podTemplate(label: 'mypod',
         }
 
         container('helm'){
-          sh 'echo "Running Helm Test"'
+          sh 'echo "Running Helm cli Test"'
           sh 'helm init'
           sh 'helm ls'
         }
 
-        stage ('test deployment'){
+        stage ('Test helm Chart'){
             container('helm'){
               echo "Running helm lint ${chart_dir}"
               sh "helm lint $chart_dir"
@@ -63,7 +63,7 @@ podTemplate(label: 'mypod',
 
         container('docker') {
             stage('Build Docker Image') {
-              if(config.image.registry == "dockerhub"){
+              if(config.image.registry_type == "dockerhub"){
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub-credentials',
                        usernameVariable: 'DOCKER_USER']]) {
                 sh """
@@ -82,10 +82,8 @@ podTemplate(label: 'mypod',
             }
             stage('Test image') {
                  /* Ideally, we would run a test framework against our image.
-                  * For this example, we're using a Volkswagen-type approach
-                  * Source: Getintodevops.com
                   */
-                  sh 'echo "Tests passed"'
+                  sh 'echo "No Test Framework specified"'
             }
             stage('Push Docker Image to Registry') {
                 /*
@@ -140,16 +138,19 @@ podTemplate(label: 'mypod',
               /*
               Set Image variables
                */
-              def APPIMAGE
+              def REPOSITORY
               if(config.image.registry == "dockerhub"){
-                APPIMAGE = "${dockerhub_user}/${config.image.image_name}:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub-credentials',
+                       usernameVariable: 'DOCKER_USER']]) {
+                       REPOSITORY = "${DOCKER_USER}/${config.image.image_name}"
+                }
               } else {
                 def NAMESPACE = sh(script: 'cat /var/run/configs/registry-config/namespace', returnStdout: true)
                 def REGISTRY = sh(script: 'cat /var/run/configs/registry-config/registry', returnStdout: true)
-                APPIMAGE = "${REGISTRY}/${NAMESPACE}/${config.image.image_name}:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+                REPOSITORY = "${REGISTRY}/${NAMESPACE}/${config.image.image_name}"
               }
 
-              sh 'echo "Image: ${APPIMAGE}"'
+              def TAG = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
 
 
               if(config.release.dryrun){
@@ -157,13 +158,13 @@ podTemplate(label: 'mypod',
                   sh """
                     #!/bin/bash
                     echo "Installing new Helm Deployment Dryrun"
-                    helm install ${config.release.chart_dir} --set app_image=${APPIMAGE} --set app_dockerversion="${env.BRANCH_NAME}-${env.BUILD_NUMBER}" --dry-run --name ${config.release.name}
+                    helm install ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG} --dry-run --name ${config.release.name}
                   """
                 } else {
                   sh """
                     #!/bin/bash
                     echo "Upgrading Helm Deployment Dryrun"
-                    helm upgrade ${config.release.name} ${config.release.chart_dir} --set app_image=${APPIMAGE} --set app_dockerversion="${env.BRANCH_NAME}-${env.BUILD_NUMBER}" --dry-run
+                    helm upgrade ${config.release.name} ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG} --dry-run
                   """
                 }
               } else {
@@ -171,13 +172,13 @@ podTemplate(label: 'mypod',
                   sh """
                     #!/bin/bash
                     echo "Installing new Helm Deployment"
-                    helm install ${config.release.chart_dir} --set image.repository=${APPIMAGE} --name ${config.release.name} 
+                    helm install ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG} --name ${config.release.name}
                   """
                 } else {
                   sh """
                     #!/bin/bash
                     echo "Upgrading Helm Deployment"
-                    helm upgrade ${config.release.name} ${config.release.chart_dir} --set app_image=${APPIMAGE} --set app_dockerversion="${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+                    helm upgrade ${config.release.name} ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG}
                   """
                 }
               }
