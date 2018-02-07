@@ -10,7 +10,7 @@
  },
  "release" : {
    "name" : "12factorapp",
-   "chart_dir" : "./bluemix/12factorapp/helm/12factorapp",
+   "chart_dir" : "./helm/12factorapp",
    "initialInstall" : true,
    "test" : true,
    "dryrun" : false
