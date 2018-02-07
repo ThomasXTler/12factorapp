@@ -173,7 +173,7 @@ podTemplate(label: 'mypod',
                     #!/bin/bash
                     echo "Installing new Helm Deployment"
                     //helm install ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG} --name ${config.release.name}
-                    helm install ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG} --name ${config.release.name} --service.type=NodePort
+                    helm install ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG},service.type=NodePort --name ${config.release.name}
                   """
                 } else {
                   sh """
