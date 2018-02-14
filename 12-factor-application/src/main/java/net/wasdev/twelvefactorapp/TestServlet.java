@@ -17,7 +17,21 @@ public class TestServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         PrintWriter out = response.getWriter();
-        out.println("hello world from Container V2.0 Ich werde bekloppt!");
-        System.out.println("printed - hello world from Container bluemix v4 - to the screen");
+        //out.println("hello world from Container V2.0 Ich werde bekloppt!");
+        System.out.println("printed - hello world from demo app - to log file");
+
+        try {
+            out.println("<!DOCTYPE html>");  // HTML 5
+            out.println("<html><head>");
+            out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+            out.println("<title>" + "12 Factor Demo Application" + "</title></head>");
+            out.println("<body>");
+            out.println("<h1>" + "Version 2.0" + "</h1>");  // Prints "Hello, world!"
+            // Set a hyperlink image to refresh this page
+            //out.println("<img src='images/return.gif'>");
+            out.println("</body></html>");
+        } finally {
+            out.close();  // Always close the output writer
+        }
     }
 }
