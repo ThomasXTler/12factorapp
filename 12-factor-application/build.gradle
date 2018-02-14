@@ -97,7 +97,7 @@ if (!hasProperty('libertyRoot')) {
 }
 
 // Run FVT by default
-check.dependsOn fvt
+//check.dependsOn fvt
 
 // Package things up at the end
 check.dependsOn('libertyPackage')
