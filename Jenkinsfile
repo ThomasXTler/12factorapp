@@ -61,16 +61,16 @@ podTemplate(label: 'mypod',
             }
         }
 
-        //stage('Maven Build'){
-        //    container('maven'){
-        //        // Maven Install here
-        //        // mvn install -Pwlp-install -Dwlp.install.dir=/Users/oliverlucht/bluemix/liberty/wlp
-        //        // sh 'mvn -B -DskipTests clean package'
-        //        echo ">>> Running Maven build"
-        //        sh 'mvn install -Pwlp-install'
-        //        echo "Done Maven build"
-        //    }
-        //}
+        stage('Maven Build'){
+            container('maven'){
+                // Maven Install here
+                // mvn install -Pwlp-install -Dwlp.install.dir=/Users/oliverlucht/bluemix/liberty/wlp
+                // sh 'mvn -B -DskipTests clean package'
+                echo ">>> Running Maven build"
+                sh 'mvn install -Pwlp-install'
+                echo "Done Maven build"
+            }
+        }
 
         container('docker') {
             stage('Build Docker Image') {
