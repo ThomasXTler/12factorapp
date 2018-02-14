@@ -28,7 +28,7 @@ public class TestServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>" + "Version 2.0" + "</h1>");  // Prints "Hello, world!"
             // Set a hyperlink image to refresh this page
-            out.println("<img src='image.png'>");
+            out.println("<img src='/image.png'>");
             out.println("</body></html>");
         } finally {
             out.close();  // Always close the output writer
