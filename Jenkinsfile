@@ -31,10 +31,10 @@ podTemplate(label: 'mypod',
         //Inspired by lachie83
         def configfile = readFile('Jenkinsfile.json')
         def config = new groovy.json.JsonSlurperClassic().parseText(configfile)
-        println "Pipeline Config ==> ${config}"
+        println ">>> Pipeline Config ==> ${config}"
 
         if(!config.pipeline.enabled){
-          println "Pipeline disabled"
+          println ">>> Pipeline disabled"
           return
         }
 
@@ -44,23 +44,33 @@ podTemplate(label: 'mypod',
         Testing Kubectl
          */
         container('kubectl'){
-          sh 'echo "Testing kubectl"'
+          sh 'echo ">>> Testing kubectl"'
           sh 'kubectl get nodes'
         }
 
         container('helm'){
-          sh 'echo "Running Helm cli Test"'
+          sh 'echo ">>> Running Helm cli Test"'
           sh 'helm init'
           sh 'helm ls'
         }
 
         stage ('Test helm Chart'){
             container('helm'){
-              echo "Running helm lint ${chart_dir}"
+              echo ">>> Running helm lint ${chart_dir}"
               sh "helm lint $chart_dir"
             }
         }
 
+        //stage('Maven Build'){
+        //    container('maven'){
+        //        // Maven Install here
+        //        // mvn install -Pwlp-install -Dwlp.install.dir=/Users/oliverlucht/bluemix/liberty/wlp
+        //        // sh 'mvn -B -DskipTests clean package'
+        //        echo ">>> Running Maven build"
+        //        sh 'mvn install -Pwlp-install'
+        //        echo "Done Maven build"
+        //    }
+        //}
 
         container('docker') {
             stage('Build Docker Image') {
@@ -84,7 +94,7 @@ podTemplate(label: 'mypod',
             stage('Test image') {
                  /* Ideally, we would run a test framework against our image.
                   */
-                  sh 'echo "No Test Framework specified"'
+                  sh 'echo ">>> No Test Framework specified"'
             }
             stage('Push Docker Image to Registry') {
                 /*
@@ -96,7 +106,7 @@ podTemplate(label: 'mypod',
                              usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD']]) {
                         sh """
                         #!/bin/bash
-                        echo "Pushing Image to dockerhub"
+                        echo ">>> Pushing Image to dockerhub"
                         docker login -u=${DOCKER_USER} -p=${DOCKER_PASSWORD}
                         docker push ${DOCKER_USER}/${config.image.image_name}:${env.BRANCH_NAME}-${env.BUILD_NUMBER}
                         """
@@ -117,7 +127,7 @@ podTemplate(label: 'mypod',
                     }
 
                 } else {
-                  sh 'echo "Publish Docker image deactivated in Jenkinsfile.json"'
+                  sh 'echo ">>> Publish Docker image deactivated in Jenkinsfile.json"'
                 }
             }
         }
@@ -126,7 +136,7 @@ podTemplate(label: 'mypod',
           container('helm'){
 
             stage('Initalize Helm'){
-              sh 'echo "Initializing Helm..."'
+              sh 'echo ">>> Initializing Helm..."'
               sh 'helm init'
             }
 
@@ -158,13 +168,13 @@ podTemplate(label: 'mypod',
                 if(config.release.initialInstall){
                   sh """
                     #!/bin/bash
-                    echo "Installing new Helm Deployment Dryrun"
+                    echo ">>> Installing new Helm Deployment Dryrun"
                     helm install ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG} --dry-run --name ${config.release.name}
                   """
                 } else {
                   sh """
                     #!/bin/bash
-                    echo "Upgrading Helm Deployment Dryrun"
+                    echo ">>> Upgrading Helm Deployment Dryrun"
                     helm upgrade ${config.release.name} ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG} --dry-run
                   """
                 }
@@ -172,14 +182,14 @@ podTemplate(label: 'mypod',
                 if(config.release.initialInstall){
                   sh """
                     #!/bin/bash
-                    echo "Installing new Helm Deployment"
+                    echo ">>> Installing new Helm Deployment"
                     helm install ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG} --name ${config.release.name}
 
                   """
                 } else {
                   sh """
                     #!/bin/bash
-                    echo "Upgrading Helm Deployment"
+                    echo ">>> Upgrading Helm Deployment"
                     helm upgrade ${config.release.name} ${config.release.chart_dir} --set image.repository=${REPOSITORY},image.tag=${TAG}
                   """
                 }
@@ -188,7 +198,7 @@ podTemplate(label: 'mypod',
 
             if(config.release.test){
               stage('Testing Helm Release'){
-                sh 'echo "Running Helm Test"'
+                sh 'echo ">>> Running Helm Test"'
                 sh "helm test ${config.release.name} --cleanup"
                }
             }
