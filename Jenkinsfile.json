@@ -9,7 +9,7 @@
    "build_path" : "."
  },
  "release" : {
-   "name" : "an12factorapp",
+   "name" : "an12factorappv2",
    "chart_dir" : "./helm/12factorapp",
    "initialInstall" : false,
    "test" : true,
