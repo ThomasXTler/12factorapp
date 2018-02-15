@@ -163,7 +163,7 @@ podTemplate(label: 'mypod',
 
               def TAG = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
 
-              sh 'echo ">>>>>>>>>>>>>>>>>>>>> " + $TAG'
+              //sh 'echo ">>>>>>>>>>>>>>>>>>>>> " + $TAG'
 
               if(config.release.dryrun){
                 if(config.release.initialInstall){
