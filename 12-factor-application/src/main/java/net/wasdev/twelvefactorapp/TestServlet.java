@@ -26,7 +26,7 @@ public class TestServlet extends HttpServlet {
             out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
             out.println("<title>" + "12 Factor Demo Application" + "</title></head>");
             out.println("<body>");
-            out.println("<h1>" + "Version 2.0" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "Version 3.0" + "</h1>");  // Prints "Hello, world!"
             // Set a hyperlink image to refresh this page
             out.println("<img src='./image.png'>");
             //out.println("</body></html>");
