@@ -70,23 +70,23 @@ publishing {
 
 // Add a functional test task that runs during the 'check' phase that uses the Liberty Gradle plugin
 // to launch Liberty and run the test classes in the fvt source set
-//task fvt(type: Test, dependsOn: publishWar) {
-//    group 'Verification'
-//    description 'Runs the functional verification tests.'
-//    reports.html.destination = file("$buildDir/reports/fvt")
-//    reports.junitXml.destination = file("$buildDir/test-results/fvt")
-//    include '**/fvt/**'
-//    exclude '**/unit/**'
-//    systemProperties = ['liberty.test.port': "${libertyPort}"]
-//    dependsOn libertyStart
-//    finalizedBy libertyStop
-//}
+task fvt(type: Test, dependsOn: publishWar) {
+    group 'Verification'
+    description 'Runs the functional verification tests.'
+    reports.html.destination = file("$buildDir/reports/fvt")
+    reports.junitXml.destination = file("$buildDir/test-results/fvt")
+    include '**/fvt/**'
+    exclude '**/unit/**'
+    systemProperties = ['liberty.test.port': "${libertyPort}"]
+    dependsOn libertyStart
+    finalizedBy libertyStop
+}
 
 test {
-//    reports.html.destination = file("$buildDir/reports/unit")
-  //  reports.junitXml.destination = file("$buildDir/test-results/unit")
-  //  include '**/unit/**'
-  //  exclude '**/fvt/**'
+    reports.html.destination = file("$buildDir/reports/unit")
+    reports.junitXml.destination = file("$buildDir/test-results/unit")
+    include '**/unit/**'
+    exclude '**/fvt/**'
 }
 
 assemble.dependsOn('publishWar')
