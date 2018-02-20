@@ -11,7 +11,8 @@ image:
 service:
   # name of the service
   name: helm12factorappservice
-  type: NodePort
+  #type: NodePort
+  type: ClusterIP
   externalPort: 80
   # internal port of the application running in the container.  
   internalPort: 9082
