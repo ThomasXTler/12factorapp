@@ -13,14 +13,22 @@ service:
   name: helm12factorappservice
   type: NodePort
   externalPort: 80
-  # internal port of the application running in the container.  
+  # internal port of the application running in the container.
   internalPort: 9082
 ingress:
-  enabled: false
+  enabled: true
   # Used to create an Ingress record.
   hosts:
     - chart-example.local
+  rules:
+    - http:
+  paths:
+  - path: /12-factor-application/Test
+  backend:
+    serviceName: helm12factorappservice
+    servicePort: 5000
   annotations:
+    kubernetes.io/ingress.class: "istio"
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   tls:
