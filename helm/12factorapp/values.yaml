@@ -20,6 +20,7 @@ service:
   type: ClusterIP
   # external port reachable from within the cluster (not from the internet)
   port: 9082
+  targetPort: 9082
 
 ingress:
   enabled: true
