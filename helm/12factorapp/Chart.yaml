@@ -1,4 +1,4 @@
 apiVersion: v1
 description: A first Helm chart for my 12 factor demo app 
 name: 12factorapp
-version: 2.0.0
+version: 1.0.0
