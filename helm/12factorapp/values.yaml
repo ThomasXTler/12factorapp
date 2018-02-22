@@ -32,7 +32,7 @@ ingress:
   paths:
   - path: /12-factor-application/Test
   backend:
-    #define the service which belongs to this ingress
+    # define the service which belongs to this ingress
     serviceName: helm12factorappservice
     servicePort: 9082
   annotations:
