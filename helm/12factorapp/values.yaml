@@ -11,7 +11,7 @@ image:
 
 service:
   # name of the service
-  name: helm12factorappservice
+  name: http 
   # NodePort to define a service reachable from the internet
   #type: NodePort
   #externalPort: 80
