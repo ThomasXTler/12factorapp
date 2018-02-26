@@ -29,18 +29,18 @@ public class TestServlet extends HttpServlet {
             out.println("<h1>" + "Version 1.0 " + "</h1>");  // Prints "Hello, world!"
             out.println("<h1>" + "" + "</h1>");  // Prints "Hello, world!"
             out.println("<h1>" + "" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "I.    Codebase:  Eine im Versionsmanagementsystem verwaltete Codebase, viele Deployments" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "II.   Abhängigkeiten:  Abhängigkeiten explizit deklarieren und isolieren" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "III.  Konfiguration:  Die Konfiguration in Umgebungsvariablen ablegen" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "IV.   Unterstützende Dienste:  Unterstützende Dienste als angehängte Ressourcen behandeln" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "V.    Build, release, run:  Build- und Run-Phase strikt trennen" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "VI.   Prozesse:  Die App als einen oder mehrere Prozesse ausführen" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "VII.  Bindung an Ports:  Dienste durch das Binden von Ports exportieren" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "VIII. Nebenläufigkeit:  Mit dem Prozess-Modell skalieren" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "IX.   Einweggebrauch:  Robuster mit schnellem Start und problemlosen Stopp" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "X.    Dev-Prod-Vergleichbarkeit:  Entwicklung, Staging und Produktion so ähnlich wie möglich halten" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "XI.   Logs:  Logs als Strom von Ereignissen behandeln" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "XII.  Admin-Prozesse:  Admin/Management-Aufgaben als einmalige Vorgänge behandeln" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h4>" + "I.    Codebase:  Eine im Versionsmanagementsystem verwaltete Codebase, viele Deployments" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "II.   Abhaengigkeiten:  Abhaengigkeiten explizit deklarieren und isolieren" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "III.  Konfiguration:  Die Konfiguration in Umgebungsvariablen ablegen" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "IV.   Unterstuetzende Dienste:  Unterstuetzende Dienste als angehaengte Ressourcen behandeln" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "V.    Build, release, run:  Build- und Run-Phase strikt trennen" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "VI.   Prozesse:  Die App als einen oder mehrere Prozesse ausfuehren" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "VII.  Bindung an Ports:  Dienste durch das Binden von Ports exportieren" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "VIII. Nebenlaeufigkeit:  Mit dem Prozess-Modell skalieren" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "IX.   Einweggebrauch:  Robuster mit schnellem Start und problemlosen Stopp" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "X.    Dev-Prod-Vergleichbarkeit:  Entwicklung, Staging und Produktion so aehnlich wie moeglich halten" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "XI.   Logs:  Logs als Strom von Ereignissen behandeln" + "</h4>");  // Prints "Hello, world!"
+            out.println("<h4>" + "XII.  Admin-Prozesse:  Admin/Management-Aufgaben als einmalige Vorgaenge behandeln" + "</h4>");  // Prints "Hello, world!"
             
            
             // Set a hyperlink image to refresh this page
@@ -51,3 +51,4 @@ public class TestServlet extends HttpServlet {
         }
     }
 }
+a
