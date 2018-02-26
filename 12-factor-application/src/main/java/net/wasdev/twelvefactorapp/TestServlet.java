@@ -27,6 +27,22 @@ public class TestServlet extends HttpServlet {
             out.println("<title>" + "12 Factor Demo Application" + "</title></head>");
             out.println("<body>");
             out.println("<h1>" + "Version 1.0 " + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "I.    Codebase:  Eine im Versionsmanagementsystem verwaltete Codebase, viele Deployments" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "II.   Abhängigkeiten:  Abhängigkeiten explizit deklarieren und isolieren" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "III.  Konfiguration:  Die Konfiguration in Umgebungsvariablen ablegen" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "IV.   Unterstützende Dienste:  Unterstützende Dienste als angehängte Ressourcen behandeln" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "V.    Build, release, run:  Build- und Run-Phase strikt trennen" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "VI.   Prozesse:  Die App als einen oder mehrere Prozesse ausführen" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "VII.  Bindung an Ports:  Dienste durch das Binden von Ports exportieren" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "VIII. Nebenläufigkeit:  Mit dem Prozess-Modell skalieren" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "IX.   Einweggebrauch:  Robuster mit schnellem Start und problemlosen Stopp" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "X.    Dev-Prod-Vergleichbarkeit:  Entwicklung, Staging und Produktion so ähnlich wie möglich halten" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "XI.   Logs:  Logs als Strom von Ereignissen behandeln" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "XII.  Admin-Prozesse:  Admin/Management-Aufgaben als einmalige Vorgänge behandeln" + "</h1>");  // Prints "Hello, world!"
+            
+           
             // Set a hyperlink image to refresh this page
             //out.println("<img src='./image.png'>");
             //out.println("</body></html>");
