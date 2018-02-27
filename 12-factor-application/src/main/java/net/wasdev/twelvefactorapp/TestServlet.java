@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 @WebServlet("/Test")
 public class TestServlet extends HttpServlet {
 
@@ -16,9 +19,20 @@ public class TestServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+        
+        InetAddress ip;
+        String hostname = "";
+        try {
+            ip = InetAddress.getLocalHost();
+            hostname = ip.getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        
         PrintWriter out = response.getWriter();
-        //out.println("hello world from Container V2.0 Ich werde bekloppt!");
         System.out.println("printed - hello world from demo app - to log file");
+        System.out.println("Your current IP address : " + ip);
+        System.out.println("Your current Hostname : " + hostname);
 
         try {
             out.println("<!DOCTYPE html>");  // HTML 5
@@ -27,6 +41,7 @@ public class TestServlet extends HttpServlet {
             out.println("<title>" + "12 Factor Demo Application" + "</title></head>");
             out.println("<body>");
             out.println("<h1>" + "Version 3.0 der 12 Factor Demo Anwendung" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h4>" + "Current IP: " + ip + " Current Hostname: " + hostname + "</h4>"); 
             out.println("<h1>" + "" + "</h1>");  // Prints "Hello, world!"
             out.println("<h1>" + "" + "</h1>");  // Prints "Hello, world!"
             out.println("<h4>" + "I.    Codebase:  Eine im Versionsmanagementsystem verwaltete Codebase, viele Deployments" + "</h4>");  // Prints "Hello, world!"
