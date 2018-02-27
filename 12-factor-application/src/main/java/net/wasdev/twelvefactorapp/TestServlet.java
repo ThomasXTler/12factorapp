@@ -20,7 +20,7 @@ public class TestServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         
-        InetAddress ip;
+        InetAddress ip = null;
         String hostname = "";
         try {
             ip = InetAddress.getLocalHost();
