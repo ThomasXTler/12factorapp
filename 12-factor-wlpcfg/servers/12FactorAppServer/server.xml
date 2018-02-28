@@ -19,6 +19,12 @@
         <feature>ssl-1.0</feature>
     </featureManager>
     <keyStore id="defaultKeyStore" password="yourPassword" />
+    <!-- clientAuthenticationSupported set to enable bidirectional trust -->
+    <ssl id="defaultSSLConfig"
+         keyStoreRef="defaultKeyStore"
+         trustStoreRef="defaultTrustStore"
+         clientAuthenticationSupported="true" />
+
 
     <quickStartSecurity userPassword="password"
         userName="kate"></quickStartSecurity>
