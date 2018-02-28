@@ -57,6 +57,7 @@ public class TestServlet extends HttpServlet {
             out.println("<h4>" + "XII.  Admin-Prozesse:  Admin/Management-Aufgaben als einmalige Vorgaenge behandeln" + "</h4>");  // Prints "Hello, world!"
             out.println("<h1>" + "" + "</h1>");  
             out.println("<h1>" + "" + "</h1>");  
+            out.println("<h1>" + "_________________________________________________________________________________________" + "</h1>"); 
             out.println("<h8>" + "Current IP: " + ip + "</h8>"); 
         } finally {
             out.close();  // Always close the output writer
