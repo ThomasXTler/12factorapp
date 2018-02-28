@@ -40,10 +40,9 @@ public class TestServlet extends HttpServlet {
             out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
             out.println("<title>" + "12 Factor Demo Application" + "</title></head>");
             out.println("<body>");
-            out.println("<h1>" + "Version 3.0 der 12 Factor Demo Anwendung" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h4>" + "Current IP: " + ip + " Current Hostname: " + hostname + "</h4>"); 
-            out.println("<h1>" + "" + "</h1>");  // Prints "Hello, world!"
-            out.println("<h1>" + "" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "Version 1.0 der 12 Factor Demo Anwendung" + "</h1>");  // Prints "Hello, world!"
+            out.println("<h1>" + "" + "</h1>");  
+            out.println("<h1>" + "" + "</h1>");  
             out.println("<h4>" + "I.    Codebase:  Eine im Versionsmanagementsystem verwaltete Codebase, viele Deployments" + "</h4>");  // Prints "Hello, world!"
             out.println("<h4>" + "II.   Abhaengigkeiten:  Abhaengigkeiten explizit deklarieren und isolieren" + "</h4>");  // Prints "Hello, world!"
             out.println("<h4>" + "III.  Konfiguration:  Die Konfiguration in Umgebungsvariablen ablegen" + "</h4>");  // Prints "Hello, world!"
@@ -56,11 +55,9 @@ public class TestServlet extends HttpServlet {
             out.println("<h4>" + "X.    Dev-Prod-Vergleichbarkeit:  Entwicklung, Staging und Produktion so aehnlich wie moeglich halten" + "</h4>");  // Prints "Hello, world!"
             out.println("<h4>" + "XI.   Logs:  Logs als Strom von Ereignissen behandeln" + "</h4>");  // Prints "Hello, world!"
             out.println("<h4>" + "XII.  Admin-Prozesse:  Admin/Management-Aufgaben als einmalige Vorgaenge behandeln" + "</h4>");  // Prints "Hello, world!"
-            
-           
-            // Set a hyperlink image to refresh this page
-            //out.println("<img src='./image.png'>");
-            //out.println("</body></html>");
+            out.println("<h1>" + "" + "</h1>");  
+            out.println("<h1>" + "" + "</h1>");  
+            out.println("<h7>" + "Current IP: " + ip + "</h7>"); 
         } finally {
             out.close();  // Always close the output writer
         }
